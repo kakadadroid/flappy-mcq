@@ -14,10 +14,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-@font-face {
-    font-family: "flappy";
-    src: url("../assets/fonts/04B_19__.ttf");
-}
+@import url(http://fonts.googleapis.com/css?family=Galindo);
 
 @-webkit-keyframes animLand {
    0% { background-position: 0px 0px; }
@@ -135,7 +132,7 @@ body
 }
 
 h2{
-   font-family: "flappy";
+   font-family: "Galindo";
    font-size: 40px;
    text-shadow: 4px 4px 0 #000, 2px 2px 0 #000;
 }
