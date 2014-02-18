@@ -39,8 +39,10 @@ var pipeheight = 300; // the distance between top and bottom pipes including the
 var pipewidth = 52;
 var pipes = new Array();
 
-var replayclickable = false;
+var questions = new Array();
 
+var replayclickable = false;
+var isQuestionLoaded = false;
 //sounds
 var volume = 30;
 var soundJump = new buzz.sound("assets/sounds/sfx_wing.ogg");
@@ -53,7 +55,6 @@ buzz.all().setVolume(volume);
 //loops
 var loopGameloop;
 var loopPipeloop;
-
 $(document).ready(function() {
    if(window.location.search == "?debug")
       debugmode = true;
@@ -65,7 +66,19 @@ $(document).ready(function() {
    if(savedscore != "")
       highscore = parseInt(savedscore);
    
+   //load questions
+   $.getJSON("http://cors.io/spreadsheets.google.com/feeds/list/0AhQQiySd_V7ldDlzbFRJN19FNFh5bDAwblctdEJ3Y2c/od6/public/basic?alt=json", function(data) {
+     //first row "title" column
+      var rows = data.feed.entry;
+      for(var i=0; i<rows.length; i++) {
+         var question = {word:rows[i].title.$t, answer:rows[i].content.$t}
+         questions.push(question);
+      }
+      isQuestionLoaded = true;
+      console.log("loaded a");
+   });
    //start with the splash screen
+
    showSplash();
 });
 
@@ -288,8 +301,9 @@ $(document).keydown(function(e){
       //in ScoreScreen, hitting space should click the "replay" button. else it's just a regular spacebar hit
       if(currentstate == states.ScoreScreen)
          $("#replay").click();
-      else
+      else{
          screenClick();
+      }
    }
 });
 
@@ -301,13 +315,15 @@ else
 
 function screenClick()
 {
-   if(currentstate == states.GameScreen)
-   {
-      playerJump();
-   }
-   else if(currentstate == states.SplashScreen)
-   {
-      startGame();
+   if(isQuestionLoaded==true){
+      if(currentstate == states.GameScreen)
+      {
+         playerJump();
+      }
+      else if(currentstate == states.SplashScreen)
+      {
+         startGame();
+      }
    }
 }
 
@@ -512,6 +528,14 @@ function updatePipes()
    
    var newpipe = $('<div class="pipe animated"><div class="pipe_upper" style="height: ' + topheight + 'px;"></div><div class="guess top" style="top: ' +(topheight + 35) + 'px;"></div><div class="pipe_middle" style="height: ' + middleheight+ 'px; top: ' + middletop + 'px;"></div><div class="guess bottom" style="bottom: '+(bottomheight+35)+'px;"></div><div class="pipe_lower" style="height: ' + bottomheight + 'px;"></div><div class="question"></div></div>');
    
+   //get the word
+   var random = randomIntFromInterval(0, questions.length);
+   var word = questions[random].word;
+   //get answer: a for abstract, c for concrete
+   var answer = "c";
+   if(questions[random].answer == "type: a")
+      answer = "a";
+
    //generate two random numbers
    
    var firstnumber = randomIntFromInterval(2,13);
