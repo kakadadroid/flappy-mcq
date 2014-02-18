@@ -71,7 +71,11 @@ $(document).ready(function() {
      //first row "title" column
       var rows = data.feed.entry;
       for(var i=0; i<rows.length; i++) {
-         var question = {word:rows[i].title.$t, answer:rows[i].content.$t}
+         console.log(rows[i].content);
+         //correct: abst., wrong: conc.
+         var t = rows[i].content.$t.split(/[ ,]+/);
+         var question = {word:rows[i].title.$t, correct:t[1], wrong:t[3]};
+         console.log(question);
          questions.push(question);
       }
       isQuestionLoaded = true;
@@ -526,22 +530,29 @@ function updatePipes()
 
    //pipe skeleton
    
-   var newpipe = $('<div class="pipe animated"><div class="pipe_upper" style="height: ' + topheight + 'px;"></div><div class="guess top" style="top: ' +(topheight + 35) + 'px;"><h2>abstr.</h2></div><div class="pipe_middle" style="height: ' + middleheight+ 'px; top: ' + middletop + 'px;"></div><div class="guess bottom" style="bottom: '+(bottomheight+35)+'px;"><h2>conc.</h2></div><div class="pipe_lower" style="height: ' + bottomheight + 'px;"></div><div class="question"></div></div>');
+   var newpipe = $('<div class="pipe animated"><div class="pipe_upper" style="height: ' + topheight + 'px;"></div><div class="guess top" style="top: ' +(topheight + 35) + 'px;"></div><div class="pipe_middle" style="height: ' + middleheight+ 'px; top: ' + middletop + 'px;"></div><div class="guess bottom" style="bottom: '+(bottomheight+35)+'px;"></div><div class="pipe_lower" style="height: ' + bottomheight + 'px;"></div><div class="question"></div></div>');
    
    //get the word
    var random = randomIntFromInterval(0, questions.length);
    var word = questions[random].word;
-   //get answer: a for abstract, c for concrete
-   var answer = "c";
-   if(questions[random].answer == "type: a")
-      answer = "a";
+   var correct = questions[random].correct;
+   var wrong = questions[random].wrong;
 
    //append word below pipe
    var wordElement = $('<h2 class = "question_digit first">'+word+'</h2>');
+   var correctElement = $('<h2 class = "question_digit first">'+correct+'</h2>');
+   var wrongElement = $('<h2 class = "question_digit first">'+wrong+'</h2>');
    newpipe.children(".question").append(wordElement);
-   
+
    //flip a coin - 1: top is correct, 0: bottom is correct
-//   var topguesscorrect = randomIntFromInterval(0,1);
+   var topguesscorrect = randomIntFromInterval(0,1);
+   if(topguesscorrect==1){
+      newpipe.children(".guess.top").append(correctElement);
+      newpipe.children(".guess.bottom").append(wrongElement);
+   } else {
+      newpipe.children(".guess.top").append(wrongElement);
+      newpipe.children(".guess.bottom").append(correctElement);
+   }
    
 /*   //append first guess
    
@@ -571,9 +582,7 @@ function updatePipes()
 */   
    
    $("#flyarea").append(newpipe);
-   if(answer=="a")
-      newpipe.correct = 1;
-   else newpipe.correct = 0;
+   newpipe.correct = topguesscorrect;
       
    pipes.push(newpipe);
 }
