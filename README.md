@@ -1,11 +1,11 @@
-Flappy Math Saga
+Flappy MCQ
 =========
-A Flappy Bird clone that teaches you times tables.
+A Flappy Bird clone that tranforms an mcq test.
 
 Credits
 ------
 **[nebez](https://github.com/nebez)** Floppy Bird
-
+**[tikwid](https://github.com/tikwid)**Flappy-math-saga
 Notice
 =====
 
