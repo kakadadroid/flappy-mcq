@@ -17,7 +17,8 @@ If the copyright holder would like for the assets to be removed, let me know!
 
 License
 =====
-Copyright 2014 Arron McLaughlin
+Original work Copyright 2014 Arron McLaughlin
+Modified work Copyright 2014 Kakadadroid
 
 Licensed under the Apache License, Version 2.0 (the "License");  
 you may not use this file except in compliance with the License.  
