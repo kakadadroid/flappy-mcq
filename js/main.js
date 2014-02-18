@@ -526,7 +526,7 @@ function updatePipes()
 
    //pipe skeleton
    
-   var newpipe = $('<div class="pipe animated"><div class="pipe_upper" style="height: ' + topheight + 'px;"></div><div class="guess top" style="top: ' +(topheight + 35) + 'px;"></div><div class="pipe_middle" style="height: ' + middleheight+ 'px; top: ' + middletop + 'px;"></div><div class="guess bottom" style="bottom: '+(bottomheight+35)+'px;"></div><div class="pipe_lower" style="height: ' + bottomheight + 'px;"></div><div class="question"></div></div>');
+   var newpipe = $('<div class="pipe animated"><div class="pipe_upper" style="height: ' + topheight + 'px;"></div><div class="guess top" style="top: ' +(topheight + 35) + 'px;"><h2>abstr.</h2></div><div class="pipe_middle" style="height: ' + middleheight+ 'px; top: ' + middletop + 'px;"></div><div class="guess bottom" style="bottom: '+(bottomheight+35)+'px;"><h2>conc.</h2></div><div class="pipe_lower" style="height: ' + bottomheight + 'px;"></div><div class="question"></div></div>');
    
    //get the word
    var random = randomIntFromInterval(0, questions.length);
@@ -536,60 +536,14 @@ function updatePipes()
    if(questions[random].answer == "type: a")
       answer = "a";
 
-   //generate two random numbers
-   
-   var firstnumber = randomIntFromInterval(2,13);
-   var secondnumber = randomIntFromInterval(2,13);
-          
-   var firstnumber_digits = firstnumber.toString().split('');
-   var secondnumber_digits = secondnumber.toString().split('');
-   
-   //append first number of question
-   
-   for(var i = 0; i<firstnumber_digits.length; i++) {
-         
-         var newdigit = $('<div class = "question_digit first" style = "background-image: url(\'assets/font_big_'+firstnumber_digits[i]+'.png\');"></div>');
-         newpipe.children(".question").append(newdigit);
-   }
-   
-   //append multiplication symbol
-   
-   newpipe.children(".question").append('<div class="question_digit symbol" style="background-image: url(\'assets/font_shitty_x.png\');"></div>');
-   
-   //append second number of question
-   
-   for(var i = 0; i<secondnumber_digits.length; i++) {
-         
-         var newdigit = $('<div class = "question_digit second" style = "background-image: url(\'assets/font_big_'+secondnumber_digits[i]+'.png\');"></div>');
-         newpipe.children(".question").append(newdigit);
-   }
-   
-   //generate a correct and incorrect guess
-   
-   var correctguess = firstnumber * secondnumber;
-   var smaller = Math.min(firstnumber,secondnumber);
-   //var larger = Math.max(firstnumber,secondnumber);
-   var offset = smaller * randomIntFromInterval(1,4);
-   
-   var incorrectguess = 0;
-   
-   if(randomIntFromInterval(0,1) === 1) {
-         incorrectguess = correctguess + offset;
-   } else {
-         incorrectguess = correctguess - offset;
-         if (incorrectguess <= 0) {
-               incorrectguess = correctguesss + offset; 
-         }
-   }
+   //append word below pipe
+   var wordElement = $('<h2 class = "question_digit first">'+word+'</h2>');
+   newpipe.children(".question").append(wordElement);
    
    //flip a coin - 1: top is correct, 0: bottom is correct
-   var topguesscorrect = randomIntFromInterval(0,1);
+//   var topguesscorrect = randomIntFromInterval(0,1);
    
-   //append first guess
-   
-   correctguess_digits = correctguess.toString().split('');
-   incorrectguess_digits = incorrectguess.toString().split('');
-   
+/*   //append first guess
    
    for(var i = 0; i<correctguess_digits.length; i++) {
          
@@ -601,10 +555,10 @@ function updatePipes()
                newpipe.children(".guess.bottom").append(newdigit);
          }
    }
-   
+*/   
    //append second guess
    
-   for(var i = 0; i<incorrectguess_digits.length; i++) {
+/*   for(var i = 0; i<incorrectguess_digits.length; i++) {
          
          var newdigit = $('<div class = "guess_digit" style = "background-image: url(\'assets/font_big_'+incorrectguess_digits[i]+'.png\');"></div>');
          
@@ -614,11 +568,12 @@ function updatePipes()
                newpipe.children(".guess.top").append(newdigit);
          }
    }
-   
+*/   
    
    $("#flyarea").append(newpipe);
-   
-   newpipe.correct = topguesscorrect;
+   if(answer=="a")
+      newpipe.correct = 1;
+   else newpipe.correct = 0;
       
    pipes.push(newpipe);
 }
