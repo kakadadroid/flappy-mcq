@@ -1,7 +1,7 @@
 Flappy MCQ
 =========
 A Flappy Bird clone that tranforms an mcq test.
-
+For now the kids in Poline's class will learn about abstract and concrete nouns with this!
 Credits
 ------
 **[nebez](https://github.com/nebez)** Floppy Bird<br>
