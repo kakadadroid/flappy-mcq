@@ -82,7 +82,7 @@ $(document).ready(function() {
       console.log("loaded a");
    });
    //start with the splash screen
-
+   $(".shake").css('-webkit-animation-play-state', 'paused');
    showSplash();
 });
 
@@ -109,7 +109,8 @@ function setCookie(cname,cvalue,exdays)
 function showSplash()
 {
    currentstate = states.SplashScreen;
-   
+   //unshake
+   document.getElementsByTagName("body")[0].className = "";
    //set the defaults (again)
    velocity = 0;
    position = 180;
@@ -402,6 +403,9 @@ function playerDead()
    $(".animated").css('animation-play-state', 'paused');
    $(".animated").css('-webkit-animation-play-state', 'paused');
    
+   //shake
+   document.getElementsByTagName("body")[0].className=("shake");
+   $(".shake").css('-webkit-animation-play-state', 'running');
    //drop the bird to the floor
    var playerbottom = $("#player").position().top + $("#player").width(); //we use width because he'll be rotated 90 deg
    var floor = $("#flyarea").height();
@@ -410,7 +414,6 @@ function playerDead()
    
    //it's time to change states. as of now we're considered ScoreScreen to disable left click/flying
    currentstate = states.ScoreScreen;
-
    //destroy our gameloops
    clearInterval(loopGameloop);
    clearInterval(loopPipeloop);
