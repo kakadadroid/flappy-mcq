@@ -3,6 +3,7 @@ Flappy Quiz
 A Flappy Bird clone that tranforms an mcq test.<br>
 For now the kids in Poline's class will learn about abstract and concrete nouns with this!<br>
 Edit the quiz questions **[here](https://docs.google.com/spreadsheet/ccc?key=0AhQQiySd_V7ldDlzbFRJN19FNFh5bDAwblctdEJ3Y2c&usp=drive_web#gid=0)**.<br>
+The live flapping quiz **[here](http://kakadadroid.github.io/flappy-quiz/)**.
 Credits
 ------
 **[nebez](https://github.com/nebez)** Floppy Bird<br>
