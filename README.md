@@ -18,7 +18,7 @@ If the copyright holder would like for the assets to be removed, let me know!
 
 License
 =====
-Original work Copyright 2014 Arron McLaughlin
+Original work Copyright 2014 Nebez Briefkani
 
 Modified work Copyright 2014 Kakadadroid
 
