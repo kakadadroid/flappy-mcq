@@ -68,7 +68,7 @@ $(document).ready(function() {
       highscore = parseInt(savedscore);
    
    //load questions
-   $.getJSON("http://cors.io/spreadsheets.google.com/feeds/list/0AhQQiySd_V7ldDlzbFRJN19FNFh5bDAwblctdEJ3Y2c/od6/public/basic?alt=json", function(data) {
+   $.getJSON("http://spreadsheets.google.com/feeds/list/0AhQQiySd_V7ldDlzbFRJN19FNFh5bDAwblctdEJ3Y2c/od6/public/basic?alt=json", function(data) {
      //first row "title" column
       var rows = data.feed.entry;
       for(var i=0; i<rows.length; i++) {
