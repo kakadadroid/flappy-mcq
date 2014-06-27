@@ -96,10 +96,12 @@ $("#question_link").click(function(event){
    event.stopPropagation();
 });
 $(".question_button").click(function(event){
-   event.stopPropagation();
+   event.stopPropagation();   
    $("#loader").show();
    isQuestionLoaded = false;
-   var key = $("#question_link").val().match(/(?=key=).{48}/)[0].substr(4);
+   var keymatch = $("#question_link").val().match(/(?=key=).{48}/);
+   var key;
+   if(keymatch!=null) key=keymatch[0].substr(4);
    console.log(key)
    var url = "http://spreadsheets.google.com/feeds/list/"+key+"/od6/public/basic?alt=json"
    $.getJSON(url, function(data){
