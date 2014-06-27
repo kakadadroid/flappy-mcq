@@ -235,6 +235,18 @@ Screen - Game
    -webkit-animation: animSky 7s linear infinite;
    animation: animSky 7s linear infinite;
 }
+#loader
+{
+   padding: 50px;
+   text-align: center;
+   z-index: 100;
+   opacity: 0.9;
+   position: absolute;
+   background-color: #000000;
+   bottom: 0;
+   height: 420px;
+   width: 100%;
+}
 
 #flyarea
 {

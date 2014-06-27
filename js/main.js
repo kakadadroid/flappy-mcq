@@ -77,6 +77,7 @@ $(document).ready(function() {
 });
 
 var loadQuestionFromSpreadsheet = function(data){
+   $("#loader").show();
    //first row "title" column
    var rows = data.feed.entry;
    questions = []
@@ -89,12 +90,14 @@ var loadQuestionFromSpreadsheet = function(data){
       questions.push(question);
    }
    isQuestionLoaded = true;
+   $("#loader").hide();
 }
 $("#question_link").click(function(event){
    event.stopPropagation();
 });
 $(".question_button").click(function(event){
    event.stopPropagation();
+   $("#loader").show();
    isQuestionLoaded = false;
    var key = $("#question_link").val().match(/(?=key=).{48}/)[0].substr(4);
    console.log(key)
