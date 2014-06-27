@@ -257,6 +257,14 @@ Screen - Game
    animation: animCeiling 481ms linear infinite;
 }
 
+#custom_questions_form{
+   text-align: center;
+}
+.question_button{
+   background-color: #73BF2E;
+   color: white;
+}
+
 #land
 {
    position: absolute;

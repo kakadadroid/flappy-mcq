@@ -68,23 +68,43 @@ $(document).ready(function() {
       highscore = parseInt(savedscore);
    
    //load questions
-   $.getJSON("http://spreadsheets.google.com/feeds/list/0AhQQiySd_V7ldDlzbFRJN19FNFh5bDAwblctdEJ3Y2c/od6/public/basic?alt=json", function(data) {
-     //first row "title" column
-      var rows = data.feed.entry;
-      for(var i=0; i<rows.length; i++) {
-         console.log(rows[i].content);
-         //correct: abst., wrong: conc.
-         var t = rows[i].content.$t.split(/[ ,]+/);
-         var question = {word:rows[i].title.$t, correct:t[1], wrong:t[3]};
-         console.log(question);
-         questions.push(question);
-      }
-      isQuestionLoaded = true;
-      console.log("loaded a");
+   $.getJSON("http://spreadsheets.google.com/feeds/list/0AhQQiySd_V7ldDlzbFRJN19FNFh5bDAwblctdEJ3Y2c/od6/public/basic?alt=json", function(data){
+      loadQuestionFromSpreadsheet(data);
    });
    //start with the splash screen
    $(".shake").css('-webkit-animation-play-state', 'paused');
    showSplash();
+});
+
+var loadQuestionFromSpreadsheet = function(data){
+   //first row "title" column
+   var rows = data.feed.entry;
+   questions = []
+   for(var i=0; i<rows.length; i++) {
+      console.log(rows[i].content);
+      //correct: abst., wrong: conc.
+      var t = rows[i].content.$t.split(/[ ,]+/);
+      var question = {word:rows[i].title.$t, correct:t[1], wrong:t[3]};
+      //console.log(question);
+      questions.push(question);
+   }
+   isQuestionLoaded = true;
+}
+$("#question_link").click(function(event){
+   event.stopPropagation();
+});
+$(".question_button").click(function(event){
+   event.stopPropagation();
+   isQuestionLoaded = false;
+   var key = $("#question_link").val().match(/(?=key=).{48}/)[0].substr(4);
+   console.log(key)
+   var url = "http://spreadsheets.google.com/feeds/list/"+key+"/od6/public/basic?alt=json"
+   $.getJSON(url, function(data){
+      loadQuestionFromSpreadsheet(data);
+   }).error(function(){
+      alert("Make sure the google spreadsheet is PUBLISHED. TO PUBLISH: Go to File > Publish to the web > Start publishing")
+      isQuestionLoaded = true;
+   });
 });
 
 function getCookie(cname)
@@ -133,6 +153,7 @@ function showSplash()
    $(".animated").css('animation-play-state', 'running');
    $(".animated").css('-webkit-animation-play-state', 'running');
    
+   $("#custom_questions_form").show();
    //fade in the splash
    $("#splash").transition({ opacity: 1 }, 2000, 'ease');
 }
@@ -143,6 +164,7 @@ function startGame()
    
    //fade out the splash
    $("#splash").stop();
+   $("#custom_questions_form").hide();
    $("#splash").transition({ opacity: 0 }, 500, 'ease');
    
    //update the big score
@@ -315,9 +337,9 @@ $(document).keydown(function(e){
 
 //Handle mouse down OR touch start
 if("ontouchstart" in window)
-   $(document).on("touchstart", screenClick);
+   $("#flyarea").on("touchstart", screenClick);
 else
-   $(document).on("mousedown", screenClick);
+   $("#flyarea").on("mousedown", screenClick);
 
 function screenClick()
 {
