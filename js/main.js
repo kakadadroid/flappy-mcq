@@ -68,7 +68,7 @@ $(document).ready(function() {
       highscore = parseInt(savedscore);
    
    //load questions
-   $.getJSON("http://spreadsheets.google.com/feeds/list/0AhQQiySd_V7ldDlzbFRJN19FNFh5bDAwblctdEJ3Y2c/od6/public/basic?alt=json", function(data){
+   $.getJSON("http://steamhours.herokuapp.com/cors?url=http://spreadsheets.google.com/feeds/list/0AhQQiySd_V7ldDlzbFRJN19FNFh5bDAwblctdEJ3Y2c/od6/public/basic?alt=json", function(data){
       loadQuestionFromSpreadsheet(data);
    });
    //start with the splash screen
@@ -79,7 +79,7 @@ $(document).ready(function() {
 var loadQuestionFromSpreadsheet = function(data){
    $("#loader").show();
    //first row "title" column
-   var rows = data.feed.entry;
+   var rows = data.response.feed.entry;
    questions = []
    for(var i=0; i<rows.length; i++) {
       console.log(rows[i].content);
@@ -103,7 +103,7 @@ $(".question_button").click(function(event){
    var key;
    if(keymatch!=null) key=keymatch[0].substr(4);
    console.log(key)
-   var url = "http://spreadsheets.google.com/feeds/list/"+key+"/od6/public/basic?alt=json"
+   var url = "http://steamhours.herokuapp.com/cors?url=http://spreadsheets.google.com/feeds/list/"+key+"/od6/public/basic?alt=json"
    $.getJSON(url, function(data){
       loadQuestionFromSpreadsheet(data);
    }).error(function(){
