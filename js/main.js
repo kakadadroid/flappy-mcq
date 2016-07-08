@@ -82,11 +82,9 @@ var loadQuestionFromSpreadsheet = function(data){
    var rows = data.response.feed.entry;
    questions = []
    for(var i=0; i<rows.length; i++) {
-      console.log(rows[i].content);
       //correct: abst., wrong: conc.
       var t = rows[i].content.$t.split(/[ ,]+/);
       var question = {word:rows[i].title.$t, correct:t[1], wrong:t[3]};
-      //console.log(question);
       questions.push(question);
    }
    isQuestionLoaded = true;
@@ -102,8 +100,7 @@ $(".question_button").click(function(event){
    var keymatch = $("#question_link").val().match(/(?=key=).{48}/);
    var key;
    if(keymatch!=null) key=keymatch[0].substr(4);
-   console.log(key)
-   var url = "http://steamhours.herokuapp.com/cors?url=http://spreadsheets.google.com/feeds/list/"+key+"/od6/public/basic?alt=json"
+   var url = "http://spreadsheets.google.com/feeds/list/"+key+"/od6/public/basic?alt=json"
    $.getJSON(url, function(data){
       loadQuestionFromSpreadsheet(data);
    }).error(function(){
