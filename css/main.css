@@ -1,8 +1,8 @@
 /*
    Original work Copyright 2014 Nebez Briefkani
-   Modified work Copyright 2014 Kakadadroid
+   Modified work Copyright 2014 Keang
     - main.css
-   
+
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
@@ -231,7 +231,7 @@ Screen - Game
    background-repeat: repeat-x;
    background-position: 0px 100%;
    background-color: #4ec0ca;
-   
+
    -webkit-animation: animSky 7s linear infinite;
    animation: animSky 7s linear infinite;
 }
@@ -264,7 +264,7 @@ Screen - Game
    width: 100%;
    background-image: url('../assets/ceiling.png');
    background-repeat: repeat-x;
-   
+
    -webkit-animation: animCeiling 481ms linear infinite;
    animation: animCeiling 481ms linear infinite;
 }
@@ -287,7 +287,7 @@ Screen - Game
    background-repeat: repeat-x;
    background-position: 0px 0px;
    background-color: #ded895;
-   
+
    -webkit-animation: animLand 2516ms linear infinite;
    animation: animLand 2516ms linear infinite;
 }
@@ -330,7 +330,7 @@ Screen - Game
    height: 280px;
    background-image: url('../assets/scoreboard.png');
    background-repeat: no-repeat;
-   
+
    z-index: 1000;
 }
 
@@ -409,7 +409,7 @@ Screen - Game
    width: 34px;
    height: 24px;
    background-image: url('../assets/bird.png');
-   
+
    -webkit-animation: animBird 600ms steps(4) infinite;
    animation: animBird 300ms steps(4) infinite;
 
@@ -423,7 +423,7 @@ Screen - Game
    width: 100px;
    height: 100%;
    z-index: 10;
-   
+
    -webkit-animation: animPipe 7500ms linear;
    animation: animPipe 7500ms linear;
 
@@ -500,7 +500,7 @@ Screen - Game
 }
 
 .question {
-    
+
    position:absolute;
    bottom: -60px;
    width: 300px;
@@ -508,7 +508,7 @@ Screen - Game
 }
 
 .question_digit {
-    
+
    width: 24px;
    height: 36px;
    position: relative;
@@ -524,7 +524,7 @@ Screen - Game
 }
 
 .guess_digit {
-    
+
    width: 24px;
    height: 36px;
    position: relative;
